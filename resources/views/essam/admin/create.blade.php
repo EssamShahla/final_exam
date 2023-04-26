@@ -22,7 +22,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+            <form class="form_data">
         <div class="card-body row-col-12">
 
             <div class="row">
@@ -81,7 +81,7 @@
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="button" onclick="performStore()" class="btn btn-primary">Store</button>
+                <button type="submit" class="btn btn-primary">Store</button>
                 <a href="{{route('admins.index')}}" class="btn btn-primary">Back</a>
               </div>
             </form>
@@ -96,18 +96,6 @@
 
 @section('script')
     <script>
-        function performStore(){
-            let formData = new FormData();
-            formData.append('firstName' , document.getElementById('firstName').value);
-            formData.append('lastName' , document.getElementById('lastName').value);
-            formData.append('gender' , document.getElementById('gender').value);
-            formData.append('date' , document.getElementById('date').value);
-            formData.append('email' , document.getElementById('email').value);
-            formData.append('password' , document.getElementById('password').value);
-            formData.append('mobile' , document.getElementById('mobile').value);
-            formData.append('status' , document.getElementById('status').value);
-            formData.append('image' , document.getElementById('image').files[0]);
-            store('/essam/admin/admins' , formData);
-        }
+        var url = '/essam/admin/admins';
     </script>
 @endsection

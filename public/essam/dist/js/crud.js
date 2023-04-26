@@ -1,13 +1,35 @@
-function store(url, data) {
+// function store(url, data) {
+//     axios.post(url, data)
+//         .then(function (response) {
+//             showMessage(response.data);
+//             clearForm();
+//             clearAndHideErrors();
+
+//         })
+//         .catch(function (error) {
+
+//             if (error.response.data.errors !== undefined) {
+//                 showErrorMessages(error.response.data.errors);
+//             } else {
+//                 showMessage(error.response.data);
+//             }
+//         });
+
+// }
+
+function store(url, data, form = null) {
     axios.post(url, data)
         .then(function (response) {
             showMessage(response.data);
+            if(form != null){
+                form[0].reset();
+            }
             clearForm();
             clearAndHideErrors();
 
         })
         .catch(function (error) {
-
+            console.log(error);
             if (error.response.data.errors !== undefined) {
                 showErrorMessages(error.response.data.errors);
             } else {

@@ -444,5 +444,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('essam/dist/js/crud.js') }}"></script>
 @yield('script')
+<script>
+    $('.form_data').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            let formData = new FormData(this);
+            store(url, formData, form);
+        });
+</script>
 </body>
 </html>
