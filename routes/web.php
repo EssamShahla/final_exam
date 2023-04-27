@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyBranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserAuthController;
+use App\Models\CompanyBranch;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,19 +23,27 @@ Route::get('/', function () {
 });
 
 
-Route::prefix('essam/')->middleware('guest:admin')->group(function(){
+Route::prefix('essam/')->middleware('guest:admin,companyBranch')->group(function(){
     Route::get('{guard}/login' , [UserAuthController::class , 'showLogin'])->name('showLogin');
     Route::post('{guard}/login' , [UserAuthController::class , 'login']);
 });
 
 
-Route::prefix('essam/admin')->middleware('auth:admin,author')->group(function(){
+// Route::prefix('essam/admin')->middleware('auth:admin,author')->group(function(){
+
+
+Route::prefix('essam/admin')->group(function(){
     Route::view('' , 'essam.parent')->name('essamhome');
 
-// this is routes for company table
+    // this is routes for company table
     Route::resource('/companies', CompanyController::class);
-    Route::get('/companies_restore/{id}' , [CompanyController::class , 'restore']);
-    Route::get('/companies_force/{id}' , [CompanyController::class , 'force']);
+    Route::post('companies_update/{id}' , [CompanyController::class , 'update']);
+
+
+    // this is routes for branches table
+    Route::resource('/branches', CompanyBranchController::class);
+    Route::get('/branches_restore/{id}' , [CompanyBranchController::class , 'restore']);
+    Route::get('/branches_force/{id}' , [CompanyBranchController::class , 'force']);
 
 
     // this is the admin's routes table

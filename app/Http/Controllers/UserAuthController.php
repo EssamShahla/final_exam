@@ -44,7 +44,7 @@ class UserAuthController extends Controller
     }
 
     public function logout(Request $request){
-        $guard = Auth('admin')->check() ;
+        $guard = Auth('admin')->check() ? 'admin' : 'companyBranch' ;
         Auth::guard($guard)->logout();
         $request->session()->invalidate();
 

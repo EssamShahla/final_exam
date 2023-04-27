@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use App\Models\CompanyBranch;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class CompanyBranchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-
-        $companies = Company::withCount('companyBranch')->orderBy('id','desc')->paginate(21);
-        return response()->view('essam.company.index' , compact('companies'));
-        // $infos = Company::all();
-
-        // foreach($infos as $info){
-        //     echo $info->name . "||" . $info->email . "<br>" ;
-        // }
+        $branches = CompanyBranch::with('company')->orderBy('id','desc')->paginate(21);
+        return response()->view('essam.branch.index' , compact('branches'));
     }
 
     /**
@@ -45,16 +39,6 @@ class CompanyController extends Controller
         //
     }
 
-    // for restore the trashed items
-    public function restore($id){
-        $infos = Company::onlyTrashed()->findOrFail($id)->restore();
-    }
-
-    // to delete the item perfectly
-    public function force($id){
-        $infos = Company::findOrFail($id)->forceDelete();
-    }
-
     /**
      * Display the specified resource.
      *
@@ -63,8 +47,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $companies = Company::findOrFail($id);
-        return response()->view('essam.company.show' , compact('companies'));
+        //
     }
 
     /**
@@ -75,8 +58,7 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $companies = Company::findOrFail($id);
-        return response()->view('essam.company.edit' , compact('companies'));
+        //
     }
 
     /**
@@ -88,7 +70,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -99,7 +81,6 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $companies = Company::destroy($id);
-
+        //
     }
 }
